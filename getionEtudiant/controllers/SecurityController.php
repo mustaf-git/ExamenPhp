@@ -39,15 +39,21 @@ public function login(Request $request){
             Session::setSession("user_connect",$user);
             if(PasswordEncoder::decode($data["password"], $user["password"])){
                 
-                if(Session::keyExist("action") && Session::getSession("action")== "reservation"){
-                    Response::redirectUrl("reservation/addReservation");
-                }
+                
                 if($user["role"]=="ROLE_ADMIN"){
-                    Response::redirectUrl("security/showUser");
+                    Response::redirectUrl("user/acceuilAdmin");
                 }
-                elseif($user["role"]=="ROLE_VISITEUR"){
-                    //redirect_url("accueil.visiteur");
-                    Response::redirectUrl("bien/showCatalogue");
+                elseif($user["role"]=="ROLE_RP"){
+                    Response::redirectUrl("user/acceuilRP");
+                }
+                elseif($user["role"]=="ROLE_AC"){
+                    Response::redirectUrl("user/acceuilAC");//acceuilProf
+                }
+                elseif($user["role"]=="ROLE_PROF"){
+                    Response::redirectUrl("user/acceuilProf");
+                }
+                elseif($user["role"]=="ROLE_ETUDIANT"){
+                    Response::redirectUrl("user/acceuilEtu");
                 }
             }else{
                 $this->validator->setErrors("error_login","login ou mot de passe incorrect");
@@ -104,18 +110,16 @@ public function register(Request $request){
     
 }
 
-public function logout(){
-    Session::destroySession();
-    Response::redirectUrl("bien/showCatalogue");
-}
+    public function logout(){
+        Session::destroySession();
+        Response::redirectUrl("security/login");
+    }
 
-public function showUser(){
-    if(!Role::estAdmin())Response::redirectUrl("bien/showCatalogue");
-    $model=new UserModel();
-    $data=$model->selectAll();
-    //dd($data);
-    $this->render("security/show.user",["users"=> $data]);
 
-}
+
+
+    
+
+
 
 }

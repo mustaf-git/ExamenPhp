@@ -44,14 +44,14 @@ class UserModel extends AbstractModel{
 
     public function updateDataConne(array $user):int{
         extract($user);
-        $sql="UPDATE user us
+        $sql="UPDATE user
         SET 
-        us.login=?, us.password=?
-        WHERE us.id=?";
+        login=?, password=?
+        WHERE id=?";
 
         $result=$this->persit($sql,[$login,$password,$id]);
         
-        return $result["count"];
+        return $result;//["count"];
     }
 
 
@@ -60,24 +60,25 @@ class UserModel extends AbstractModel{
 // donc on les gère ici dans user
 
 // modifier AC ou RP (admin)
-    public function updateAcRp(array $user):int{
+    public function updateAcRp(array $user){
         extract($user);
-        $sql="UPDATE user us
+        $sql="UPDATE user
         SET 
-        us.nom=?, us.login=?, us.password=?, us.avatar=?, us.role=?
-        WHERE us.id=?";
+        nom_complet=?, login=?, password=?, avatar=?, role=?
+        WHERE id=?";
 
-        $result=$this->persit($sql,[$nom,$login,$password,$avatar,$role,$id]);
+        $result=$this->persit($sql,[$nom_complet,$login,$password,$avatar,$role,$id]);
         
-        return $result["count"];
+        return $result;
     }
 
 // Supprimer un AC ou RP (admin)
 
-    public function removeAcRp(int $id):int{
-
-        return $this->dataBase->executeUpdate("DELETE FROM user WHERE id = ?",[$id]);
-
+    public function removeAcRp(int $id){
+        //extract($data);
+        $sql = "DELETE FROM user WHERE id=?";
+        $result = $this->persit($sql,[$id]);
+        return $result;
     }
 
 }
