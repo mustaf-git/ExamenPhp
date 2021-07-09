@@ -1,0 +1,15 @@
+{
+    "name": "junio/gestion-bien",
+    "authors": [
+        {
+            "name": "Fulbert gato junior Adanhodou",
+            "email": "fulbertgatojunior@gmail.com"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": {"ism\\": "."}
+    },
+
+    "require": {}
+}

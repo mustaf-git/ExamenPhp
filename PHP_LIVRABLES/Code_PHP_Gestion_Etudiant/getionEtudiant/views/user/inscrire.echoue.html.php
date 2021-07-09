@@ -1,0 +1,1 @@
+<h1>L'inscription  a echoué</h1>

@@ -1,0 +1,1 @@
+<h1>inscription effectuée avec succèes</h1>
